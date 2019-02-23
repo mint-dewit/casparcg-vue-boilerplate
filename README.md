@@ -26,6 +26,11 @@ yarn run build
 yarn run lint
 ```
 
+### Adding a template to the bundle:
+ 1. Create a file in the `public` directory called `{{template-name}}.html` similar to the other files
+ 2. Copy-paste one of the boilerplate templates in the `src` directory and rename it to `{{template-name}}`
+ 3. Edit `vue.config.js` and add your template to the `pages` object.
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
