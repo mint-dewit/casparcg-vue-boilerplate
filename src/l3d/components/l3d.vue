@@ -1,17 +1,23 @@
 <template>
     <div class="titlesafe left">
-        <div class="block" ref="box">
-            <div class="img"></div>
+        <div class="block">
+            <div class="inner-block" ref="box">
+                <div class="img"></div>
+            </div>
         </div>
         <div class="bars">
-            <div class="bar f0" ref="f0">{{ f0 }}</div>
-            <div class="bar f1" ref="f1">{{ f1 }}</div>
+            <div class="bar f0">
+                <div class="inner" ref="f0">{{ f0 }}</div>
+            </div>
+            <div class="bar f1">
+                <div class="inner" ref="f1">{{ f1 }}</div>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-import { TimelineLite, Back, Power2, Power4 } from 'gsap'
+import { TimelineLite, Circ, Power2, Power4 } from 'gsap'
 
 export default {
     props: {
@@ -39,51 +45,50 @@ export default {
 
         this.timelineIntro = new TimelineLite({ paused: true })
         this.timelineIntro.to(box, 0.8, {
-            // bottom: '5vh',
-            left: '5vw',
-            // height: '6vw',
-            // width: '6vw',
-            ease: Back.easeOut.config(1.7)
+            marginTop: '0vw',
+            ease: Circ.easeInOut
         })
         this.timelineIntro.to(f0, 0.4, {
-            marginLeft: 0,
-            opacity: 1,
+            marginTop: 0,
             ease: Power2.easeOut
         }, '-= .2')
         this.timelineIntro.to(f1, 0.4, {
-            marginLeft: 0,
-            opacity: 1,
+            marginTop: 0,
             ease: Power2.easeOut
         }, '-= .3')
 
         this.timelineOutro = new TimelineLite({ paused: true })
         this.timelineOutro.to(f0, 0.4, {
-            marginLeft: '3vw',
-            opacity: 0,
+            marginTop: '-3vw',
             ease: Power2.easeIn
         })
         this.timelineOutro.to(f1, 0.4, {
-            marginLeft: '3vw',
-            opacity: 0,
+            marginTop: '-3vw',
             ease: Power2.easeIn
         }, '-= .3')
         this.timelineOutro.to(box, 1, {
-            left: '100vw',
+            marginTop: '-6vw',
             ease: Power4.easeIn
         }, '-= .5')
     }
 }
 </script>
 
-<style scoped>
+<style>
 .block {
     width: 6vw;
     height: 6vw;
-    background: var(--fill-color);
     position: fixed;
     bottom: 5vh;
-    left: -6vw;
+    left: 5vw;
     z-index: 1;
+    overflow: hidden;
+}
+.inner-block {
+    width: 100%;
+    height: 100%;
+    background: var(--fill-color);
+    margin-top: 6vw;
     padding: 1vw;
 }
 .img {
@@ -100,22 +105,28 @@ export default {
     height: 6vw;
     bottom: 5vh;
     left: 11vw;
+    overflow: hidden;
 }
 .bar {
     height: 3vw;
     position: fixed;
     font-size: 2vw;
     line-height: 3vw;
-    padding-left: .5vw;
-    padding-right: .5vw;
-    color: var(--primary-text-color);
-    opacity: 0;
-    margin-left: -3vw;
-}
-.bar.f0 {
-    background: var(--primary-accent-color);
+    overflow: hidden;
 }
 .bar.f1 {
+    margin-top: 3vw;
+}
+.bar .inner {
+    color: var(--primary-text-color);
+    padding-left: .5vw;
+    padding-right: .5vw;
+    margin-top: 3vw;
+}
+.bar.f0 .inner {
+    background: var(--primary-accent-color);
+}
+.bar.f1 .inner {
     background: var(--secondary-accent-color);
     margin-top: 3vw;
 }
